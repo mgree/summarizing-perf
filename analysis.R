@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 data <- read.csv('raw.csv')
 
 times <- reshape(data, varying = c('tool1', 'tool1.min', 'tool2'), v.names='time', timevar='tool', times = c('tool1', 'tool1.min', 'tool2'), new.row.names = 1:1000, direction='long')
@@ -49,7 +51,7 @@ ggsave("speedup_boxes.png", speedup_boxes, width=6, height=6)
 speedup_diag <-
     ggplot(data) +
     geom_point(aes(y=tool2/tool1, x=tool2)) +
-    scale_x_log10(labels = comma) +
+    scale_x_log10(labels = signif) +
     scale_y_log10() +
     ylab("Speedup factor (tool1)") +
     xlab("Elapsed time (tool2)")
