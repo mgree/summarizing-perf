@@ -45,3 +45,13 @@ speedup_boxes <-
   theme(axis.text.x = element_text(angle = 45, hjust=1),
         axis.title.x = element_blank())
 ggsave("speedup_boxes.png", speedup_boxes, width=6, height=6)
+
+speedup_diag <-
+    ggplot(data) +
+    geom_point(aes(y=tool2/tool1, x=tool2)) +
+    scale_x_log10(labels = comma) +
+    scale_y_log10() +
+    ylab("Speedup factor (tool1)") +
+    xlab("Elapsed time (tool2)")
+ggsave("speedup_diag.png", speedup_diag, width=6, height=6)
+
