@@ -25,3 +25,23 @@ bars <-
         axis.text.x = element_text(angle = 45, hjust=1),
         axis.title.x = element_blank())
 ggsave("bar.png", bars, width=9, height=6)
+
+speedups <- ggplot(data, aes(x=test)) + 
+  geom_point(aes(y=tool2/tool1, color='red')) + 
+  geom_point(aes(y=tool2/tool1.min, color='blue')) + 
+  scale_y_log10() +
+  scale_color_discrete(labels = c('tool1.min', 'tool1')) + 
+  labs(y = "Speedup vs. tool2 (log10)") +
+  theme(axis.text.x = element_text(angle = 45, hjust=1))
+ggsave("speedups.png", speedups, width=9, height=6)
+
+speedup_boxes <-
+  ggplot(data) + 
+  geom_boxplot(aes(y=tool2/tool1, x='tool1')) + 
+  geom_boxplot(aes(y=tool2/tool1.min, x='tool1.min')) + 
+  scale_y_log10() +
+  scale_color_discrete(labels = c('tool1', 'tool1.min')) + 
+  labs(y = "Speedup vs. tool2 (log10)") +
+  theme(axis.text.x = element_text(angle = 45, hjust=1),
+        axis.title.x = element_blank())
+ggsave("speedup_boxes.png", speedup_boxes, width=6, height=6)
